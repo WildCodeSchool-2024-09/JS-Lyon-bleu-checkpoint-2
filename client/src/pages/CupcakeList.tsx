@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Cupcake from "../components/Cupcake";
 import Loader from "../components/Loader";
-import { Link } from "react-router-dom";
 
 /* ************************************************************************* */
 // const sampleCupcakes = [
