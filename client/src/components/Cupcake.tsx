@@ -7,6 +7,7 @@ interface CupcakeProps {
     color2: string;
     color3: string;
     name: string;
+    id: number;
   };
 }
 
