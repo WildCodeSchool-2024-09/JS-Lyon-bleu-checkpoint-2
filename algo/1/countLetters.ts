@@ -16,12 +16,15 @@ function countLetters(givenString: string, letter: string): number {
   if (givenArray.length === 0) {
     return commonLetter;
   }
+  if (letterArray.length === 0) {
+    return commonLetter;
+  }
   for (let i = 0; i < letterArray.length; i++) {
-    // for (let j = 0; i < givenArray.length; j++) {
-    //   if (letterArray[i] === givenArray[j]) {
-    //     commonLetter++;
-    //   }
-    // }
+    for (const givenCharacter of givenArray) {
+      if (letterArray[i] === givenCharacter) {
+        commonLetter++;
+      }
+    }
   }
   return commonLetter;
 }
