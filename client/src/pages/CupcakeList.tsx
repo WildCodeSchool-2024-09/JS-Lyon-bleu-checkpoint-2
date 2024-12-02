@@ -42,12 +42,19 @@ interface cupcakeProps {
   color3: string;
   name: string;
 }
+
+interface accessoryProps {
+  id: number;
+  name: string;
+  slug: string;
+}
 /* you can use sampleCupcakes if you're stucked on step 1 */
 /* if you're fine with step 1, just ignore this ;) */
 /* ************************************************************************* */
 
 function CupcakeList() {
   const [cupcakeList, setCupcakeList] = useState<cupcakeProps[] | []>([]);
+  const [accessories, setAccessories] = useState<accessoryProps[] | []>([]);
   // Step 1: get all cupcakes (with useEffect)
   useEffect(() => {
     fetch("http://localhost:3310/api/cupcakes")
@@ -55,6 +62,11 @@ function CupcakeList() {
       .then((data) => setCupcakeList(data));
   });
   // Step 3: get all accessories
+  useEffect(() => {
+    fetch("http://localhost:3310/api/accessories")
+      .then((res) => res.json())
+      .then((data) => setAccessories(data));
+  });
 
   // Step 5: create filter state
 
@@ -67,6 +79,11 @@ function CupcakeList() {
           Filter by{" "}
           <select id="cupcake-select">
             <option value="">---</option>
+            {accessories.map((accessory) => (
+              <option value={accessory.id} key={accessory.id}>
+                {accessory.name}
+              </option>
+            ))}
             {/* Step 4: add an option for each accessory */}
           </select>
         </label>
