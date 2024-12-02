@@ -1,6 +1,10 @@
 import Cupcake from "../components/Cupcake";
-
+import { useEffect, useState } from "react";
 /* ************************************************************************* */
+interface CupcakeListProps{
+
+    id : number;
+}
 const sampleCupcakes = [
   {
     id: 10,
@@ -30,35 +34,53 @@ const sampleCupcakes = [
     name: "Sweden",
   },
 ];
-
 // type CupcakeArray = typeof sampleCupcakes;
-
 /* you can use sampleCupcakes if you're stucked on step 1 */
 /* if you're fine with step 1, just ignore this ;) */
 /* ************************************************************************* */
-
-function CupcakeList() {
+export default function CupcakeList() {
   // Step 1: get all cupcakes (with useEffect)
-
+  const [cupcakes, setCupcakes] = useState<CupcakeListProps[]>([]);
+  const [accessories, setAcccessories] = useState<CupcakeListProps[]>([]);
+  useEffect(() => {
+    fetch("http://localhost:3310/api/cupcakes")
+      .then((res) => res.json())
+      .then((data) => setCupcakes(data));
+  }, []);
   // Step 3: get all accessories
-
+  console.log(cupcakes);
+   useEffect(() => {
+    fetch("http://localhost:3310/api/accessories")
+      .then((res) => res.json())
+      .then((data) => setAcccessories(data));
+  }, []);
+  console.log(accessories);
   // Step 5: create filter state
-
   return (
     <>
+    <main> 
+      {cupcakes.map((cupcake) => (
+        <Cupcake data ={cupcake} key={cupcake.id} />
+      ))}
+      </main>
+        {/* Step 2: repeat this block for each cupcake */}
       <h1>My cupcakes</h1>
       <form className="center">
         <label htmlFor="cupcake-select">
           {/* Step 5: use a controlled component for select */}
           Filter by{" "}
           <select id="cupcake-select">
-            <option value="">---</option>
+              <option value="">---</option>
+              <option value="1">Cherry</option>
+              <option value="2">Donut</option>
+              <option value="3">Chocolate</option>
+              <option value="4">Wild</option>
+              <option value="5">Christmas Candy</option>
             {/* Step 4: add an option for each accessory */}
           </select>
         </label>
       </form>
       <ul className="cupcake-list" id="cupcake-list">
-        {/* Step 2: repeat this block for each cupcake */}
         {/* Step 5: filter cupcakes before repeating */}
         <li className="cupcake-item">
           <Cupcake data={sampleCupcakes[0]} />
@@ -68,5 +90,3 @@ function CupcakeList() {
     </>
   );
 }
-
-export default CupcakeList;
