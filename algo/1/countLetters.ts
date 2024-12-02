@@ -10,8 +10,20 @@ Exemples :
 */
 
 function countLetters(givenString: string, letter: string): number {
-  // Your code here !
-  return 0;
+  let commonLetter = 0;
+  const givenArray = givenString.split("");
+  const letterArray = letter.split("");
+  if (givenArray.length === 0) {
+    return commonLetter;
+  }
+  for (let i = 0; i < letterArray.length; i++) {
+    // for (let j = 0; i < givenArray.length; j++) {
+    //   if (letterArray[i] === givenArray[j]) {
+    //     commonLetter++;
+    //   }
+    // }
+  }
+  return commonLetter;
 }
 
 export default countLetters;
