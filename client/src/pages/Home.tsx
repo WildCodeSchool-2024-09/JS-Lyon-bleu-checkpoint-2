@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import "./Home.css";
@@ -13,6 +14,15 @@ const sampleData = {
 };
 
 function Home() {
+  const [cupcakes, setCupcakes] = useState();
+  useEffect(() => {
+    fetch("http://localhost:3310/api/cupcakes")
+      .then((res) => res.json())
+      .then((data) => setCupcakes(data))
+      .catch((err) => console.error(err));
+  }, []);
+
+  console.info(cupcakes);
   return (
     <>
       <h1>Cupcake Union</h1>
