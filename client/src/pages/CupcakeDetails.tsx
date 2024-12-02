@@ -20,8 +20,8 @@ function CupcakeDetails() {
     fetch("http://localhost:3310/api/cupcakes")
       .then((res) => res.json())
       .then((data) => setCupcakes(data));
-    if (typeof cupcakes[Number(id)] !== "undefined") {
-      setCupcake(cupcakes[Number(id)]);
+    if (typeof cupcakes[Number(id) - 1] !== "undefined") {
+      setCupcake(cupcakes[Number(id) - 1]);
     }
   }, [id, cupcakes[Number(id)]]);
   return (
