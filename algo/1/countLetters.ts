@@ -10,8 +10,10 @@ Exemples :
 */
 
 function countLetters(givenString: string, letter: string): number {
-  // Your code here !
-  return 0;
+   if (letter.length !== 1) {
+    throw new Error("");
+  }
+return givenString.split('').filter(char => char === letter).length;
 }
 
 export default countLetters;
