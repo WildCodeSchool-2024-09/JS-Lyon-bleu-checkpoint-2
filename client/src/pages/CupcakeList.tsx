@@ -63,13 +63,13 @@ function CupcakeList() {
     fetch("http://localhost:3310/api/cupcakes")
       .then((res) => res.json())
       .then((data) => setCupcakeList(data));
-  });
+  }, []);
   // Step 3: get all accessories
   useEffect(() => {
     fetch("http://localhost:3310/api/accessories")
       .then((res) => res.json())
       .then((data) => setAccessories(data));
-  });
+  }, []);
 
   // Step 5: create filter state
   const FilterArray = (cupcakeList: cupcakeProps[], filter: string) => {

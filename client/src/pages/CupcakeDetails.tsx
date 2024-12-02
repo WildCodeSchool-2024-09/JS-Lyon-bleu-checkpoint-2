@@ -23,7 +23,7 @@ function CupcakeDetails() {
     if (typeof cupcakes[Number(id)] !== "undefined") {
       setCupcake(cupcakes[Number(id)]);
     }
-  });
+  }, [id, cupcakes[Number(id)]]);
   return (
     <>
       {cupcake === null ? (
