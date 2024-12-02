@@ -31,7 +31,8 @@ export default function CupcakeDetails() {
       .then((res) => res.json())
       .then((data) => setCupcakes(data))
       .catch((err) => console.error(err));
-    cupcakes[Number(id)] !== undefined && setCupcake(cupcakes[Number(id)]);
+    cupcakes[Number(id) - 1] !== undefined &&
+      setCupcake(cupcakes[Number(id) - 1]);
   }, [cupcakes[Number(id)], id]);
   return <>{cupcake !== null && <Cupcake data={cupcake} />}</>;
 }
