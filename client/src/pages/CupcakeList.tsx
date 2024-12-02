@@ -1,36 +1,38 @@
 import { useEffect, useState } from "react";
 import Cupcake from "../components/Cupcake";
+import Loader from "../components/Loader";
+import { Link } from "react-router-dom";
 
 /* ************************************************************************* */
-const sampleCupcakes = [
-  {
-    id: 10,
-    accessory_id: "4",
-    accessory: "wcs",
-    color1: "blue",
-    color2: "white",
-    color3: "red",
-    name: "France",
-  },
-  {
-    id: 11,
-    accessory_id: "4",
-    accessory: "wcs",
-    color1: "yellow",
-    color2: "red",
-    color3: "black",
-    name: "Germany",
-  },
-  {
-    id: 27,
-    accessory_id: "5",
-    accessory: "christmas-candy",
-    color1: "yellow",
-    color2: "blue",
-    color3: "blue",
-    name: "Sweden",
-  },
-];
+// const sampleCupcakes = [
+//   {
+//     id: 10,
+//     accessory_id: "4",
+//     accessory: "wcs",
+//     color1: "blue",
+//     color2: "white",
+//     color3: "red",
+//     name: "France",
+//   },
+//   {
+//     id: 11,
+//     accessory_id: "4",
+//     accessory: "wcs",
+//     color1: "yellow",
+//     color2: "red",
+//     color3: "black",
+//     name: "Germany",
+//   },
+//   {
+//     id: 27,
+//     accessory_id: "5",
+//     accessory: "christmas-candy",
+//     color1: "yellow",
+//     color2: "blue",
+//     color3: "blue",
+//     name: "Sweden",
+//   },
+// ];
 
 // type CupcakeArray = typeof sampleCupcakes;
 interface cupcakeProps {
@@ -110,11 +112,13 @@ function CupcakeList() {
         {cupcakeList.length > 1 ? (
           FilterArray(cupcakeList, filter).map((cupcake) => (
             <li className="cupcake-item" key={cupcake.id}>
-              <Cupcake data={cupcake} />
+              <Link to={`/cupcakes/${cupcake.id}`}>
+                <Cupcake data={cupcake} />
+              </Link>
             </li>
           ))
         ) : (
-          <p>Une erreur est survenue</p>
+          <Loader />
         )}
         {/* Step 5: filter cupcakes before repeating */}
         {/* end of block */}
