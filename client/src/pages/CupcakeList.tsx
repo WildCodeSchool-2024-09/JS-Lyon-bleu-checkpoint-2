@@ -55,6 +55,7 @@ interface accessoryProps {
 function CupcakeList() {
   const [cupcakeList, setCupcakeList] = useState<cupcakeProps[] | []>([]);
   const [accessories, setAccessories] = useState<accessoryProps[] | []>([]);
+  const [filter, setFilter] = useState<string>("");
   // Step 1: get all cupcakes (with useEffect)
   useEffect(() => {
     fetch("http://localhost:3310/api/cupcakes")
@@ -69,6 +70,19 @@ function CupcakeList() {
   });
 
   // Step 5: create filter state
+  const FilterArray = (cupcakeList: cupcakeProps[], filter: string) => {
+    const cupcakeFiltered = [];
+    if (filter !== "") {
+      for (const cupcake of cupcakeList) {
+        if (cupcake.accessory_id === filter) {
+          cupcakeFiltered.push(cupcake);
+        }
+      }
+    } else {
+      return cupcakeList;
+    }
+    return cupcakeFiltered;
+  };
 
   return (
     <>
@@ -77,21 +91,24 @@ function CupcakeList() {
         <label htmlFor="cupcake-select">
           {/* Step 5: use a controlled component for select */}
           Filter by{" "}
-          <select id="cupcake-select">
+          <select
+            id="cupcake-select"
+            onChange={(e) => setFilter(e.target.value)}
+          >
             <option value="">---</option>
+            {/* Step 4: add an option for each accessory */}
             {accessories.map((accessory) => (
               <option value={accessory.id} key={accessory.id}>
                 {accessory.name}
               </option>
             ))}
-            {/* Step 4: add an option for each accessory */}
           </select>
         </label>
       </form>
       <ul className="cupcake-list" id="cupcake-list">
         {/* Step 2: repeat this block for each cupcake */}
         {cupcakeList.length > 1 ? (
-          cupcakeList.map((cupcake) => (
+          FilterArray(cupcakeList, filter).map((cupcake) => (
             <li className="cupcake-item" key={cupcake.id}>
               <Cupcake data={cupcake} />
             </li>
@@ -100,9 +117,6 @@ function CupcakeList() {
           <p>Une erreur est survenue</p>
         )}
         {/* Step 5: filter cupcakes before repeating */}
-        <li className="cupcake-item">
-          <Cupcake data={sampleCupcakes[0]} />
-        </li>
         {/* end of block */}
       </ul>
     </>
