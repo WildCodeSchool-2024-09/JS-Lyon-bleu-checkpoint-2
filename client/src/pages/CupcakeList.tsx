@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+
+import { Link } from "react-router-dom";
 import Cupcake from "../components/Cupcake";
 
 interface accessoryArrayProps {
@@ -99,16 +101,21 @@ function CupcakeList() {
       <ul className="cupcake-list" id="cupcake-list">
         {filter === ""
           ? cupcakes.map((cakes) => (
-              <li className="cupcake-item" key={cakes.id}>
-                <Cupcake data={cakes} />
-              </li>
+              <Link to={`/cupcakes/${cakes.id}`} key={cakes.id}>
+                <li className="cupcake-item">
+                  <Cupcake data={cakes} />
+                </li>
+              </Link>
             ))
           : cupcakes
               .filter((cup) => cup.accessory === filter)
+
               .map((cakes) => (
-                <li className="cupcake-item" key={cakes.id}>
-                  <Cupcake data={cakes} />
-                </li>
+                <Link to={`/cupcakes/${cakes.id}`} key={cakes.id}>
+                  <li className="cupcake-item" key={cakes.id}>
+                    <Cupcake data={cakes} />
+                  </li>
+                </Link>
               ))}
       </ul>
     </>
