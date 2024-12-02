@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import Cupcake from "../components/Cupcake";
 
 /* ************************************************************************* */
@@ -38,6 +39,15 @@ const sampleCupcakes = [
 /* ************************************************************************* */
 
 function CupcakeList() {
+  const [cupcakes, setCupcakes] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:3310/api/cupcakes")
+      .then((res) => res.json())
+      .then((cake) => {
+        setCupcakes(cake);
+      });
+  }, []);
+
   // Step 1: get all cupcakes (with useEffect)
 
   // Step 3: get all accessories
@@ -58,7 +68,9 @@ function CupcakeList() {
         </label>
       </form>
       <ul className="cupcake-list" id="cupcake-list">
-        {/* Step 2: repeat this block for each cupcake */}
+        {cupcakes.map((cakes) => (
+          <Cupcake data={cakes} key={cakes} />
+        ))}
         {/* Step 5: filter cupcakes before repeating */}
         <li className="cupcake-item">
           <Cupcake data={sampleCupcakes[0]} />
