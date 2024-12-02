@@ -9,6 +9,8 @@ Exemples :
 * "bbcc" et "a" -> 0
 */
 
+// coucou
+
 function countLetters(givenString: string, letter: string): number {
   // Your code here !
   return 0;
