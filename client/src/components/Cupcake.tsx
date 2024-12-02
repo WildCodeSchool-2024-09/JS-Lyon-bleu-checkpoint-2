@@ -1,5 +1,4 @@
 import "./Cupcake.css";
-
 interface CupcakeProps {
   data: {
     accessory: string;
