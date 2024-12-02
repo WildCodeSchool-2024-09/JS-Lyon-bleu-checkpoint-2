@@ -6,8 +6,8 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 /* ************************************************************************* */
 
 import App from "./App";
-
 import CupcakeList from "./pages/CupcakeList";
+
 import Home from "./pages/Home";
 import Instructions from "./pages/Instructions";
 
@@ -45,5 +45,5 @@ if (rootElement == null) {
 createRoot(rootElement).render(
   <StrictMode>
     <RouterProvider router={router} />
-  </StrictMode>,
+  </StrictMode>
 );
